@@ -1,6 +1,5 @@
-from app.db.session import get_db
+from sqlalchemy.orm import Session
 from app.db.models import User
-from app.core.security import get_password_hash, verify_password
 
 
 """
@@ -9,22 +8,11 @@ Use este arquivo para manipular dados de usuários, como criação, leitura, atu
 Mantenha a lógica de negócios separada das rotas e adicione novos métodos conforme as funcionalidades aumentam.
 """
 
+def authenticate_user(db: Session, email: str, password: str):
+    user = db.query(User).filter(User.email == email).first()
+    if not user:
+        return None
+    if not user.verify_password(password):
+        return None
+    return user
 
-class UserService:
-
-    @staticmethod
-    def get_all_users(db):
-        return db.query(User).all()
-
-    @staticmethod
-    def get_user_by_id(db, user_id: int):
-        return db.query(User).filter(User.id == user_id).first()
-
-    @staticmethod
-    def create_user(db, user_data):
-        hashed_password = get_password_hash(user_data['password'])
-        user = User(username=user_data['username'], email=user_data['email'], hashed_password=hashed_password)
-        db.add(user)
-        db.commit()
-        db.refresh(user)
-        return user

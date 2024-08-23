@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.core.config import Config
+from app.api.core.config import Config
 
 """
 Este arquivo configura a conexão com o banco de dados utilizando SQLAlchemy.

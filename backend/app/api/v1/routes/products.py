@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.services.product_service import ProductService
+from app.api.services.product_service import ProductService
 
 """
 Este arquivo define as rotas relacionadas aos produtos.

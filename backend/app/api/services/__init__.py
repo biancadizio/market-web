@@ -1,3 +1,3 @@
-from .user_service import UserService
-from .product_service import ProductService
-from .order_service import OrderService
+from .user_service import *
+from .product_service import *
+from .order_service import *

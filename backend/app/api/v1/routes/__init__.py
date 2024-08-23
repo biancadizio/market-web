@@ -1,6 +1,10 @@
-from flask import Flask
+# app/api/v1/routes/__init__.py
+from fastapi import APIRouter
 
-def create_app():
-    app = Flask(__name__)
-    # Configurações adicionais e registros de blueprints
-    return app
+api_v1 = APIRouter()
+
+# Importe as rotas individuais
+from .auth import *
+from .users import *
+from .products import *
+from .orders import *
