@@ -1,7 +1,6 @@
-# app/api/v1/routes/__init__.py
-from fastapi import APIRouter
+from flask import Flask
 
-api_v1 = APIRouter()
+app = Flask(__name__)
 
 # Importe as rotas individuais
 from .auth import *
