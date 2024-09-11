@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, url_for
+from flask import Flask, request, jsonify, render_template, url_for, send_from_directory
 import re
 from werkzeug.security import generate_password_hash, check_password_hash
 import smtplib
@@ -42,7 +42,8 @@ def send_recovery_email(email, recovery_link):
     with smtplib.SMTP('localhost') as server:
         server.send_message(msg)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='')
+
 
 # Rotas da API
 
