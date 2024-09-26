@@ -8,8 +8,21 @@ Este é o ponto de entrada da aplicação Flask. Ele cria a instância do app e 
 Use este arquivo para iniciar a aplicação com `python main.py`.
 """
 
+
 # Simulação do banco de dados em memória
-users_db = {}
+users_db = {
+    'exemplo@email.com': {
+        'password': "teste123",
+    },
+}
+
+
+
+def hash_password(password):
+    return generate_password_hash(password)
+
+def check_password(hashed_password, plain_password):
+    return check_password_hash(hashed_password, plain_password)
 
 # Função para validar e-mail
 def is_valid_email(email):
@@ -144,18 +157,41 @@ def recover_password():
     return jsonify({"message": "E-mail de recuperação enviado"}), 200
 
 # Rota de Resetar Senha (Simplesmente um exemplo)
+# #ALTERAR
+# @app.route('/reset-password/<email>', methods=['POST'])
+# def reset_password(email):
+#     # Verificar se o e-mail existe no dicionário
+#     if email not in users_db:
+#         return {"error": "E-mail não encontrado."}, 404
+    
+#     # Se o e-mail existir, proceder com a lógica de redefinição de senha
+#     new_password = request.json.get('new_password')
+#     hashed_password = hash_password(new_password)  # Função para hashear a senha
+#     users_db[email]['password'] = hashed_password
+#     return {"message": "Senha redefinida com sucesso."}, 200
+
 @app.route('/reset-password/<email>', methods=['POST'])
 def reset_password(email):
-    data = request.json
-    new_password = data.get('password')
+    # Verificar se o e-mail existe como chave no dicionário users_db
+    if email not in users_db:
+        return {"error": "E-mail não encontrado."}, 404
     
-    if not is_strong_password(new_password):
-        return jsonify({"message": "A senha não é forte o suficiente"}), 400
+    # Se o e-mail existir, proceder com a lógica de redefinição de senha
+    new_password = request.json.get('new_password')
     
-    hashed_password = generate_password_hash(new_password)
+    # Verificar se a nova senha foi enviada
+    if not new_password:
+        return {"error": "Nova senha não fornecida."}, 400
+    
+    # Hashear a nova senha
+    hashed_password = hash_password(new_password)
+    
+    # Atualizar a senha no banco de dados simulado
     users_db[email]['password'] = hashed_password
     
-    return jsonify({"message": "Senha alterada com sucesso"}), 200
+    return {"message": "Senha redefinida com sucesso."}, 200
+
+
 
 
 
