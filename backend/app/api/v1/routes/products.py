@@ -1,5 +1,6 @@
+'''
 from flask import Blueprint, jsonify, request
-from app.services.product_service import ProductService
+from app.api.services.product_service import ProductService
 
 """
 Este arquivo define as rotas relacionadas aos produtos.
@@ -25,3 +26,17 @@ def create_product():
     data = request.json
     product = ProductService.create_product(data)
     return jsonify(product), 201
+'''
+
+
+from flask import jsonify  # Corrige a importação de jsonify
+from app.api.services.product_service import ProductService
+
+def register_routes(app):  # Aceita o 'app' como argumento
+    @app.route('/products', methods=['GET'])
+    def products():
+        products = ProductService.get_all_products()
+        return jsonify(products)
+
+
+

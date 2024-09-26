@@ -1,6 +1,9 @@
 from flask import Flask
 
-def create_app():
-    app = Flask(__name__)
-    # Configurações adicionais e registros de blueprints
-    return app
+app = Flask(__name__)
+
+# Importe as rotas individuais
+from .auth import *
+from .users import *
+from .products import *
+from .orders import *
