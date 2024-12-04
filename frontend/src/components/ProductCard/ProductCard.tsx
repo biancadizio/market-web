@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Description, Price, Title } from './ProductCard-styled';
+import { Card, Description, Price, Title } from './ProductCard-styles';
 
 
 interface ProductCardProps {

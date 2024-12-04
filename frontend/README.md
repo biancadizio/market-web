@@ -38,3 +38,37 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+Estrutura de arquivos até então:
+-> market-web
+ -> backend
+ -> database
+ -> frontend
+  -> .next
+  -> public
+   - favicon.ico
+   - next.jpg
+   - vercel.jpg
+  -> src
+   -> componentes
+    -> globals
+     -> Header
+      - Header.tsx
+      - Header-styles.ts
+     -> ProductCard
+      - ProductCard.tsx
+      - ProductCard-styles.ts
+   -> hooks
+    - useProducts.ts
+   -> pages
+    -> api
+    -> products
+     - [id].tsx
+    - _app.tsx
+    - _document.tsx
+    - index.tsx
+
+   -> utils
+    - api.ts
