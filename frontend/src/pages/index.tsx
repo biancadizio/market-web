@@ -1,10 +1,20 @@
-import React from 'react';
-import ProductCard from '../components/globals/ProductCard/ProductCard';
-import { products } from '../utils/mockProducts'; // Simule produtos inicialmente
-import Header from '../components/globals/Header/Header';
+import React from "react";
+import ProductCard from "../components/globals/ProductCard/ProductCard";
+import { products } from "../utils/mockProducts"; // Produtos simulados
+import Header from "../components/globals/Header/Header";
 import Footer from "../components/globals/Footer/Footer";
-import Carousel from "../components/globals/Carousel/Carousel"; // Supondo que este já esteja pronto
+import Carousel from "../components/globals/Carousel/Carousel"; // Componente de carousel
 
+// Simulando categorias de produtos
+const promotionalProducts = products.filter(
+  (product) => product.category === "promoção"
+);
+const bestSellers = products.filter(
+  (product) => product.category === "mais-vendidos"
+);
+const generalProducts = products.filter(
+  (product) => product.category === "geral"
+);
 
 const Home: React.FC = () => {
   return (
@@ -12,32 +22,33 @@ const Home: React.FC = () => {
       {/* Header */}
       <Header />
 
-      {/* Hero Section */}
+      {/* Carousel de Banner Promocional */}
       <section className="hero">
-        <Carousel />
+        <Carousel
+          images={[
+            "/images/carousel/carousel-1-img1.jpg",
+            "/images/carousel/carousel-1-img2.jpg",
+            "/images/carousel/carousel-1-img3.jpg",
+          ]}
+        />
       </section>
 
-      {/* Produtos Promocionais */}
+      {/* Carousel de Produtos em Promoção */}
       <section className="promotional-products">
         <h2>Produtos em Promoção</h2>
-        <div className="product-grid">
-          {products.slice(0, 4).map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              image={product.image}
-              description={product.description}
-            />
-          ))}
-        </div>
+        <Carousel products={promotionalProducts} />
       </section>
 
-      {/* Sessões para Tipos de Produtos */}
-      <section className="product-categories">
-        <h2>Explore por Categorias</h2>
-        {/* Substitua por um componente que mostre categorias */}
+      {/* Carousel de Produtos Mais Vendidos */}
+      <section className="best-sellers">
+        <h2>Produtos Mais Vendidos</h2>
+        <Carousel products={bestSellers} />
+      </section>
+
+      {/* Carousel de Produtos Gerais */}
+      <section className="general-products">
+        <h2>Produtos Gerais</h2>
+        <Carousel products={generalProducts} />
       </section>
 
       {/* Footer */}
