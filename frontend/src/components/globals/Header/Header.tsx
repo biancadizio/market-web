@@ -1,14 +1,23 @@
 import React from 'react';
-import { HeaderContainer, Nav, Logo } from './Header-styles';
+import Link from 'next/link';
+import { HeaderContainer, Logo, Nav, CartIcon } from './Header-styles';
 
 const Header: React.FC = () => {
   return (
     <HeaderContainer>
-      <Logo href="/">MarketWeb</Logo>
+      <Logo>
+        <Link href="/">MarketWeb teste</Link>
+      </Logo>
       <Nav>
-        <a href="/carrinho">Carrinho</a>
-        <a href="/login">Login</a>
+        <Link href="/">Home</Link>
+        <Link href="/products">Produtos</Link>
+        <Link href="/carrinho">Carrinho</Link>
       </Nav>
+      <CartIcon>
+        <Link href="/carrinho">
+          <img src="/icons/cart.svg" alt="Carrinho" />
+        </Link>
+      </CartIcon>
     </HeaderContainer>
   );
 };

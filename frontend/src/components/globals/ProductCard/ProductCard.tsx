@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardContainer, ProductName, ProductPrice } from './ProductCard-styles';
+import { CardContainer, ProductName, ProductPrice, ViewMoreLink } from './ProductCard-styles';
 
 type Product = {
   id: string;
@@ -12,11 +12,15 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  if (!product) {
+    return <div>Produto não disponível</div>;
+  }
+
   return (
     <CardContainer>
       <ProductName>{product.name}</ProductName>
-      <ProductPrice>R${product.price}</ProductPrice>
-      <a href={`/products/${product.id}`}>Ver mais</a>
+      <ProductPrice>R${product.price.toFixed(2)}</ProductPrice>
+      <ViewMoreLink href={`/products/${product.id}`}>Ver mais</ViewMoreLink>
     </CardContainer>
   );
 };
