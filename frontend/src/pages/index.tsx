@@ -4,6 +4,8 @@ import { products } from "../utils/mockProducts"; // Produtos simulados
 import Header from "../components/globals/Header/Header";
 import Footer from "../components/globals/Footer/Footer";
 import Carousel from "../components/globals/Carousel/Carousel"; // Componente de carousel
+import Section from "@/components/globals/Section/Section";
+
 
 // Simulando categorias de produtos
 const promotionalProducts = products.filter(

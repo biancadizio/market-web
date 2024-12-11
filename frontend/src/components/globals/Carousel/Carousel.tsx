@@ -4,14 +4,9 @@ import {
   CarouselWrapper,
   CarouselContainer,
   CarouselItem,
-  ItemImage,
-  ItemDetails,
-  ItemName,
-  ItemPrice,
-  ItemDescription,
   ArrowButton,
-  CategoryTag,
 } from "./Carousel-styles";
+import Card from "../Card/Card"; // Importar o Card
 
 const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,13 +31,13 @@ const Carousel: React.FC = () => {
 
       <CarouselContainer>
         <CarouselItem>
-          <ItemImage src={product.image(product.id)} alt={product.name} />
-          <ItemDetails>
-            <CategoryTag>{product.category}</CategoryTag>
-            <ItemName>{product.name}</ItemName>
-            <ItemPrice>{`R$ ${product.price.toFixed(2)}`}</ItemPrice>
-            <ItemDescription>{product.description}</ItemDescription>
-          </ItemDetails>
+          <Card
+            image={product.image(product.id)}
+            name={product.name}
+            price={product.price}
+            description={product.description}
+            category={product.category}
+          />
         </CarouselItem>
       </CarouselContainer>
 
