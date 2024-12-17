@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { products } from "../../../../utils/mockProducts"; // Caminho correto para mockProducts.ts
+import { products } from "../../../../utils/mockProducts";
 import {
   CarouselWrapper,
   CarouselContainer,
   CarouselItem,
   ArrowButton,
 } from "./Carousel-styles";
-import Card from "../Card/Card"; // Importar o Card
 
 const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsToShow = 5; // Quantidade de produtos visíveis no carrossel
 
   const nextProduct = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
@@ -21,7 +21,11 @@ const Carousel: React.FC = () => {
     );
   };
 
-  const product = products[currentIndex];
+  // A lógica para lidar com o carrossel contínuo
+  const visibleProducts = [
+    ...products.slice(currentIndex),
+    ...products.slice(0, (currentIndex + itemsToShow) % products.length),
+  ].slice(0, itemsToShow); // Certifica-se de que são apenas 'itemsToShow' itens
 
   return (
     <CarouselWrapper>
@@ -30,15 +34,19 @@ const Carousel: React.FC = () => {
       </ArrowButton>
 
       <CarouselContainer>
-        <CarouselItem>
-          <Card
-            image={product.image(product.id)}
-            name={product.name}
-            price={product.price}
-            description={product.description}
-            category={product.category}
-          />
-        </CarouselItem>
+        {visibleProducts.map((product, index) => (
+          <CarouselItem key={index}>
+            <img
+              src={product.image(product.id)}
+              alt={product.name}
+              style={{ width: "100%", borderRadius: "10px" }}
+            />
+            <h3>{product.name}</h3>
+            <p>{product.price}</p>
+            <p>{product.category}</p>
+            <p>{product.description}</p>
+          </CarouselItem>
+        ))}
       </CarouselContainer>
 
       <ArrowButton className="next" onClick={nextProduct}>
